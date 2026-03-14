@@ -1,0 +1,17 @@
+---
+services:
+  code-server:
+    image: lscr.io/linuxserver/code-server:latest
+    container_name: code-server
+    env_file:
+      - .env
+    environment:
+      - PUID=${PUID:-950}
+      - PGID=${PGID:-950}
+    volumes:
+      - ./config:/config
+      - /mnt/apps/docker/:/docker
+
+    ports:
+      - 8443:8443
+    restart: unless-stopped
