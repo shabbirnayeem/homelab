@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: portfolio-web
+  namespace: portfolio
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: portfolio-web
+  template:
+    metadata:
+      labels:
+        app: portfolio-web
+    spec:
+      imagePullSecrets:
+        - name: dockerhub
+      containers:
+        - name: web
+          image: snayeem/portfolio-app:sha-fa7cd16
+          ports:
+            - containerPort: 9123
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 9123
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 9123
+            initialDelaySeconds: 10
+            periodSeconds: 15
+          resources:
+            requests: { cpu: 50m, memory: 64Mi }
+            limits: { memory: 256Mi }
