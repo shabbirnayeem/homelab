@@ -19,7 +19,7 @@ spec:
       messageTemplate: |
         Automated image update
 
-        {{ range .Updated.Images }}{{ println . }}{{ end }}
+        {{ .Changed.Summary }}
     push:
       branch: main
   update:
