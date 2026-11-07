@@ -1,0 +1,14 @@
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImagePolicy
+metadata:
+  name: portfolio-app
+  namespace: flux-system
+spec:
+  imageRepositoryRef:
+    name: portfolio-app
+  filterTags:
+    pattern: '^sha-[0-9a-f]+-(?P<num>[0-9]+)$'
+    extract: '$num'
+  policy:
+    numerical:
+      order: asc

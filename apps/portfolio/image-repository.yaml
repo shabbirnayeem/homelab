@@ -1,0 +1,10 @@
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImageRepository
+metadata:
+  name: portfolio-app
+  namespace: flux-system
+spec:
+  image: snayeem/portfolio-app                # the full Docker Hub repo, e.g. docker.io/<user>/portfolio-app
+  interval: 1h              # how often to poll Docker Hub for new tags
+  secretRef:
+    name: dockerhub                # the secret from Step 2

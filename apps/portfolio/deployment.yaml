@@ -17,7 +17,7 @@ spec:
         - name: dockerhub
       containers:
         - name: web
-          image: snayeem/portfolio-app:sha-fa7cd16
+          image: snayeem/portfolio-app:sha-fa7cd16 # {"$imagepolicy": "flux-system:portfolio-app"}
           ports:
             - containerPort: 9123
           readinessProbe:
