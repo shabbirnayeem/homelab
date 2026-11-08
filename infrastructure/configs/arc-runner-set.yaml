@@ -1,0 +1,31 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: pi-k3s
+  namespace: arc-runners
+spec:
+  interval: 1h
+  releaseName: pi-k3s
+  install:
+    createNamespace: true
+  dependsOn:
+    - name: arc              # the controller HelmRelease's name
+      namespace: arc-systems          # its namespace
+  chart:
+    kind: OCIRepository
+    spec:
+      interval: 1h
+      url: oci://ghcr.io/actions/actions-runner-controller-charts/gha-runner-scale-set
+      ref:
+        tag: "0.15.1"
+  values:
+    githubConfigUrl: https://github.com/shabbirnayeem/aws-resume
+    githubConfigSecret: github-app
+    minRunners: 0
+    maxRunners: 1
+    template:
+      spec:
+        containers:
+          - name: runner
+            image: ghcr.io/actions/actions-runner:latest
+            command: ["/home/runner/run.sh"]
