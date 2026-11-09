@@ -1,13 +1,14 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: arc
+  name: pi-k3s
   namespace: flux-system
 spec:
   interval: 1h
-  path: infrastructure/controllers
+  path: infrastructure/arc/configs
   prune: true
   sourceRef:
     kind: GitRepository
     name: flux-system
-  targetNamespace: arc-systems
+  targetNamespace: arc-runners
+  

@@ -1,14 +1,13 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: pi-k3s
+  name: cloudflare
   namespace: flux-system
 spec:
   interval: 1h
-  path: infrastructure/configs
+  path: infrastructure/cloudflare
   prune: true
   sourceRef:
     kind: GitRepository
     name: flux-system
-  targetNamespace: arc-runners
-  
+  targetNamespace: cloudflare
